@@ -1,12 +1,23 @@
 {
   "name": "mikro-orm-collection-perf",
   "scripts": {
-    "start": "nest start"
+    "start": "run-s start:db update:db seed:db start:api",
+    "start:api": "nest start",
+    "start:db": "docker-compose up -d && sleep 10",
+    "update:db": "mikro-orm schema:update -r",
+    "seed:db": "ts-node seed.ts"
   },
   "dependencies": {
+    "@mikro-orm/cli": "^4.5.9",
+    "@mikro-orm/core": "^4.5.9",
+    "@mikro-orm/nestjs": "^4.3.1",
+    "@mikro-orm/postgresql": "^4.5.9",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@types/faker": "^5.5.9",
+    "dotenv": "^10.0.0",
+    "faker": "^5.5.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -16,8 +27,12 @@
     "@nestjs/schematics": "^8.0.0",
     "@types/express": "^4.17.13",
     "@types/node": "^16.0.0",
+    "npm-run-all": "^4.1.5",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.5"
+  },
+  "mikro-orm": {
+    "useTsNode": true
   }
 }
