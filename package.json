@@ -1,6 +1,7 @@
 {
   "name": "mikro-orm-collection-perf",
   "scripts": {
+    "benchmark": "./benchmark.sh",
     "start": "run-s start:db update:db seed:db start:api",
     "start:api": "nest start",
     "start:db": "docker-compose up -d && sleep 10",
